@@ -18,6 +18,8 @@ export default {
         followingCount: ({ id }) => prisma.usersConnection({where: {followers_some: { id }}}).aggregate().count(),
         // followersCount
         followersCount: ({ id }) => prisma.usersConnection({where: {following_some: { id }}}).aggregate().count(),
+        // postCount
+        postsCount: ({ id }) => prisma.postsConnection({where: {user: { id }}}).aggregate().count(),
 
         // custom된 resolver로 하나의 field를 위한 것
         // parent는 나한테 resolver를 call하는 resolver를 줌 그리고 parent는 root 또는 parent라고 불림

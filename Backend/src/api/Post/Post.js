@@ -40,8 +40,14 @@ export default {
                 }]
             });
         },
+        
         // 모든 likeCount는 prisma를 기다림 
-        likeCount: (parent, __) => prisma.likesConnection({where: { post: {id: parent.id}}}).aggregate().count()
+        likeCount: (parent, __) => { 
+            return prisma.likesConnection({where: { post: {id: parent.id}}}).aggregate().count();
+        },
 
+        commentCount: (parent, __) => {
+            return prisma.commentsConnection({where: { post: {id: parent.id}}}).aggregate().count();
+        }
     }
 }

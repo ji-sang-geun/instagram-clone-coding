@@ -5,9 +5,9 @@ export default {
         // 프로필은 누구나 볼 수 있으므로, 인증할 필요가 없음
         seeUser: async(_, args) => {
             // args로부터 id 받기
-            const { id } = args;
+            const { username } = args;
             
-            return prisma.user({ id });
+            return prisma.user({ username });
 
 
             /*

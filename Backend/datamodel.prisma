@@ -1,6 +1,6 @@
 type User {
   id: ID! @id
-  avatar: String
+  avatar: String @default(value: "https://instagram.fupg6-1.fna.fbcdn.net/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=instagram.fupg6-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=pQ0Fm-UKB3UAX-XnAcq&oh=51647e9d45d6472b5724802be8f1ac05&oe=6038598F&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2")
   username: String! @unique
   email: String! @unique
   firstName: String @default(value: "")
@@ -14,8 +14,8 @@ type User {
   comments: [Comment!] @relation(name: "CommentsOfUser", onDelete: CASCADE)
   rooms: [Room!]! 
   loginSecret: String
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Post {
@@ -26,16 +26,16 @@ type Post {
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
   likes: [Like!]! @relation(name: "LikesOfPost", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentsOfPost", onDelete: CASCADE)
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Like {
   id: ID! @id
   user: User @relation(name: "LikesOfUser")
   post: Post @relation(name: "LikesOfPost")
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Comment {
@@ -43,24 +43,24 @@ type Comment {
   text: String!
   user: User @relation(name: "CommentsOfUser")
   post: Post @relation(name: "CommentsOfPost")
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type File {
   id: ID! @id
   url: String!
   post: Post @relation(name: "FilesOfPost")
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Room {
   id: ID! @id
   participants: [User!]!
   messages: [Message!]!
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Message {
@@ -69,14 +69,14 @@ type Message {
   from: User! @relation(name: "From")
   to: User! @relation(name: "To")
   room: Room!
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type UserProfile {
   id: ID! @id
   user: User!
   posts: [Post!]!
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

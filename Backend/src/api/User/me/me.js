@@ -9,11 +9,8 @@ export default {
             // request로 부터 user를 받음
             const { user } = request; 
 
-            const userProfile = await prisma.user({id: user.id});
-            const posts = await prisma.user({id: user.id}).posts();
-            
-            return { user: userProfile, posts };
-            
+            return await prisma.user({id: user.id});
+ 
             /*
             // 웹 해킹을 최소화 하기 위해 .$fragment 사용
             // user와 post를 받아오기 위해 $fragment를 사용하는 것임
